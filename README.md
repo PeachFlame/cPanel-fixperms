@@ -51,6 +51,8 @@ sudo sh ./fixperms.sh -v -all
 ### Getting Help
 You can run fixperms with the '-h' or '--help' flags in order to see a help menu.
 
+You can also open an issue here on GitHub or post a comment on my original blog post: http://boomshadow.net/tech/fixes/fixperms-script/
+
 ### Adding Fixperms to your bin
 I host numerous websites for friends and family, who will routinely make mistakes in regards to file permissions. It's understandable; they're not tech people. I will need to fix their permissions for them pretty frequently on my servers so I opted to put the fixperms script in all my servers' bin folders.
 
