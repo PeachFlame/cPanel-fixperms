@@ -63,6 +63,6 @@ sudo mv fixperms.sh /usr/bin/
 ## History
 This script is the spiritual recreation of a cPanel 'fixperms' script originally written by my good friend, Dean Freeman. It was something he developed while we were working together doing tech support at a web hosting company.
 
-The fixperms script was so helpful, I wanted to share it with the world. It had been many years since the first version was written, so it needed some updating. I contracted my other friend, Colin R., to help me rewrite it for the masses, with Dean's blessing.
+The fixperms script was so helpful, I wanted to share it with the world. It had been many years since the first version was written, so it needed some updating. I contracted my other friend, [Colin R.](https://github.com/colinrd), to help me rewrite it for the masses, with Dean's blessing.
 
 Colin is a beast and a "pirate" when it comes to coding, and I thank him for everything he did. This newest rendition was developed while we were both working tech support at a different hosting company: ServInt.
