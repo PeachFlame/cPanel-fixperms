@@ -3,6 +3,7 @@
 # Date: Jan 26th 2012
 # Author: Colin R.
 # Revisions: Jacob "Boom Shadow" Tirey (boomshadow.net)
+# Revisions: Will Ashworth (williamashworth.com || ashworthconsulting.com)
 # Fixperms script for ServInt
 #
 # https://github.com/PeachFlame/cPanel-fixperms
@@ -69,6 +70,10 @@ fixperms () {
     helptext
   #Else, start doing work
   else
+
+    #Get the account's homedir
+    HOMEDIR=$(egrep "^${account}:" /etc/passwd | cut -d: -f6)
+
     tput bold
     tput setaf 4
     echo "Fixing perms for $account:"
@@ -77,20 +82,21 @@ fixperms () {
     tput setaf 4
     echo "Fixing website files...."
     tput sgr0
+    
     #Fix individual files in public_html
-    find /home/$account/public_html -type d -exec chmod $verbose 755 {} \;
-    find /home/$account/public_html -type f | xargs -d$'\n' -r chmod $verbose 644
-    find /home/$account/public_html -name '*.cgi' -o -name '*.pl' | xargs -r chmod $verbose 755
-    chown $verbose -R $account:$account /home/$account/public_html/*
-    find /home/$account/* -name .htaccess -exec chown $verbose $account.$account {} \;
+    find $HOMEDIR/public_html -type d -exec chmod $verbose 755 {} \;
+    find $HOMEDIR/public_html -type f | xargs -d$'\n' -r chmod $verbose 644
+    find $HOMEDIR/public_html -name '*.cgi' -o -name '*.pl' | xargs -r chmod $verbose 755
+    chown $verbose -R $account:$account $HOMEDIR/public_html/*
+    find $HOMEDIR/* -name .htaccess -exec chown $verbose $account.$account {} \;
 
     tput bold
     tput setaf 4
     echo "Fixing public_html...."
     tput sgr0
     #Fix perms of public_html itself
-    chown $verbose $account:nobody /home/$account/public_html
-    chmod $verbose 750 /home/$account/public_html
+    chown $verbose $account:nobody $HOMEDIR/public_html
+    chmod $verbose 750 $HOMEDIR/public_html
 
     #Fix subdomains that lie outside of public_html
     tput setaf 3
@@ -100,23 +106,23 @@ fixperms () {
     echo "Fixing any domains with a document root outside of public_html...."
     for SUBDOMAIN in $(grep -i document /var/cpanel/userdata/$account/* | awk '{print $2}' | grep home | grep -v public_html)
     do
-	tput bold
-	tput setaf 4
-	echo "Fixing sub/addon domain document root $SUBDOMAIN...."
-	tput sgr0
-	find $SUBDOMAIN -type d -exec chmod $verbose 755 {} \;
-	find $SUBDOMAIN -type f | xargs -d$'\n' -r chmod $verbose 644
-  	find $SUBDOMAIN -name '*.cgi' -o -name '*.pl' | xargs -r chmod $verbose 755
+  tput bold
+  tput setaf 4
+  echo "Fixing sub/addon domain document root $SUBDOMAIN...."
+  tput sgr0
+  find $SUBDOMAIN -type d -exec chmod $verbose 755 {} \;
+  find $SUBDOMAIN -type f | xargs -d$'\n' -r chmod $verbose 644
+    find $SUBDOMAIN -name '*.cgi' -o -name '*.pl' | xargs -r chmod $verbose 755
     chown $verbose -R $account:$account $SUBDOMAIN
     find $SUBDOMAIN -name .htaccess -exec chown $verbose $account.$account {} \;
     done
 
-	#Finished
+  #Finished
     tput bold
     tput setaf 3
     echo "Finished!"
-	echo "------------------------"
-	printf "\n\n"
+  echo "------------------------"
+  printf "\n\n"
     tput sgr0
   fi
 
@@ -128,7 +134,7 @@ all () {
     cd /var/cpanel/users
     for user in *
     do
-	fixperms $user
+  fixperms $user
     done
 }
 
@@ -136,33 +142,33 @@ all () {
 case "$1" in
 
     -h) helptext
-	;;
+  ;;
     --help) helptext
-	    ;;
+      ;;
     -v) verbose="-v"
 
-	case "$2" in
-
-		-all) all
-		       ;;
-		--account) fixperms "$3"
-			   ;;
-		-a) fixperms "$3"
-		    ;;
-		*) tput bold
-     		   tput setaf 1
-		   echo "Invalid Option!"
-		   helptext
-		   ;;
-	esac
-	;;
+  case "$2" in
 
     -all) all
-	  ;;
+           ;;
+    --account) fixperms "$3"
+         ;;
+    -a) fixperms "$3"
+        ;;
+    *) tput bold
+           tput setaf 1
+       echo "Invalid Option!"
+       helptext
+       ;;
+  esac
+  ;;
+
+    -all) all
+    ;;
     --account) fixperms "$2"
-      	 	;;
+          ;;
     -a) fixperms "$2"
-	;;
+  ;;
     *)
        tput bold
        tput setaf 1
