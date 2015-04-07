@@ -8,6 +8,8 @@ It safely steps through the file structure only in a particular user, and sets f
 
 It is safe to run, and I would run it in a heart-beat as a general 'fix my errors' fix.
 
+For those running multiple attached volumes on their servers, such as multiple home directories with cPanel (eg., /home, /home2, /home3, etc), [Will Ashworth](http://www.williamashworth.com) has updated the script to figure out the user's true home directory, and the script will repair permissions as needed for that user(s). This is a rather new change, so please let us know in the comments if you experience any weird issues. However, we've tested this and it does appear to be working fine (hasn't broken anything yet!).
+
 Note: This is inteded for non-DSO servers (ex: FastCGI, suPHP, etc...). You CAN run this on a DSO box, but just know that things such as Wordpress uploads won't work. You'll have to manually set some folders to be owned by the user "nobody".
 
 ## Instructions
