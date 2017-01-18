@@ -10,7 +10,7 @@ It is safe to run, and I would run it in a heart-beat as a general 'fix my error
 
 For those running multiple attached volumes on their servers, such as multiple home directories with cPanel (eg., /home, /home2, /home3, etc), [Will Ashworth](http://www.williamashworth.com) has updated the script to figure out the user's true home directory, and the script will repair permissions as needed for that user(s). This is a rather new change, so please let us know in the comments if you experience any weird issues. However, we've tested this and it does appear to be working fine (hasn't broken anything yet!).
 
-Note: This is inteded for non-DSO servers (ex: FastCGI, suPHP, etc...). You CAN run this on a DSO box, but just know that things such as Wordpress uploads won't work. You'll have to manually set some folders to be owned by the user "nobody".
+Note: This is inteded for **non-DSO** servers (Meaning, it will run just fine for: FastCGI, suPHP, etc...). You _can_ run this on a DSO box, but just know that things such as Wordpress uploads won't work. You'll have to manually set some folders to be owned by the user "nobody".
 
 ## Instructions
 You can read more info on my site here: http://boomshadow.net/tech/fixes/fixperms-script/
@@ -53,13 +53,13 @@ sudo sh ./fixperms.sh -v -all
 ### Getting Help
 You can run fixperms with the '-h' or '--help' flags in order to see a help menu.
 
-You can also open an issue here on GitHub or post a comment on my original blog post: http://boomshadow.net/tech/fixes/fixperms-script/
+You can also open an issue here on GitHub if you see any problems.
 
 ### Adding Fixperms to your bin
 I host numerous websites for friends and family, who will routinely make mistakes in regards to file permissions. It's understandable; they're not tech people. I will need to fix their permissions for them pretty frequently on my servers so I opted to put the fixperms script in all my servers' bin folders.
 
 ```bash
-sudo mv fixperms.sh /usr/bin/
+sudo mv fixperms.sh /usr/bin/fixperms
 ```
 
 ## History
