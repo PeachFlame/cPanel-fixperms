@@ -104,25 +104,25 @@ fixperms () {
     echo "------------------------"
     tput setaf 4
     echo "Fixing any domains with a document root outside of public_html...."
-    for SUBDOMAIN in $(grep -i document /var/cpanel/userdata/$account/* | awk '{print $2}' | grep home | grep -v public_html)
+    for SUBDOMAIN in $(grep -i documentroot /var/cpanel/userdata/$account/* | grep -v '.cache\|_SSL' | awk '{print $2}' | grep -v public_html)
     do
-  tput bold
-  tput setaf 4
-  echo "Fixing sub/addon domain document root $SUBDOMAIN...."
-  tput sgr0
-  find $SUBDOMAIN -type d -exec chmod $verbose 755 {} \;
-  find $SUBDOMAIN -type f | xargs -d$'\n' -r chmod $verbose 644
-    find $SUBDOMAIN -name '*.cgi' -o -name '*.pl' | xargs -r chmod $verbose 755
-    chown $verbose -R $account:$account $SUBDOMAIN
-    find $SUBDOMAIN -name .htaccess -exec chown $verbose $account.$account {} \;
+      tput bold
+      tput setaf 4
+      echo "Fixing sub/addon domain document root $SUBDOMAIN...."
+      tput sgr0
+      find $SUBDOMAIN -type d -exec chmod $verbose 755 {} \;
+      find $SUBDOMAIN -type f | xargs -d$'\n' -r chmod $verbose 644
+      find $SUBDOMAIN -name '*.cgi' -o -name '*.pl' | xargs -r chmod $verbose 755
+      chown $verbose -R $account:$account $SUBDOMAIN
+      find $SUBDOMAIN -name .htaccess -exec chown $verbose $account.$account {} \;
     done
 
   #Finished
     tput bold
     tput setaf 3
     echo "Finished!"
-  echo "------------------------"
-  printf "\n\n"
+    echo "------------------------"
+    printf "\n\n"
     tput sgr0
   fi
 
