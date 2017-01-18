@@ -104,7 +104,7 @@ fixperms () {
     echo "------------------------"
     tput setaf 4
     echo "Fixing any domains with a document root outside of public_html...."
-    for SUBDOMAIN in $(grep -i documentroot /var/cpanel/userdata/$account/* | awk '{print $2}' | grep -v public_html)
+    for SUBDOMAIN in $(grep -i documentroot /var/cpanel/userdata/$account/* | grep -v '.cache\|_SSL' | awk '{print $2}' | grep -v public_html)
     do
   tput bold
   tput setaf 4
