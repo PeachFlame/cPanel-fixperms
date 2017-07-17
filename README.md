@@ -66,3 +66,6 @@ Now that `fixperms` is in Github, all contributors will have proper credit. Howe
 
 - Dean Freeman
 - Colin R.
+
+## Contributing
+If you would like to contribute, simply create a new feature branch, named for the fix, and submit a merge request.
