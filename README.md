@@ -8,16 +8,15 @@ It safely steps through the file structure only in a particular user, and sets f
 
 It is safe to run, and I would run it in a heart-beat as a general 'fix my errors' fix.
 
-For those running multiple attached volumes on their servers, such as multiple home directories with cPanel (eg., /home, /home2, /home3, etc), [Will Ashworth](http://www.williamashworth.com) has updated the script to figure out the user's true home directory, and the script will repair permissions as needed for that user(s). This is a rather new change, so please let us know in the comments if you experience any weird issues. However, we've tested this and it does appear to be working fine (hasn't broken anything yet!).
+The script is also compatible with multiple attached volumes on their servers, such as multiple home directories with cPanel (eg., /home, /home2, /home3, etc).
 
 Note: This is inteded for **non-DSO** servers (Meaning, it will run just fine for: FastCGI, suPHP, etc...). You _can_ run this on a DSO box, but just know that things such as Wordpress uploads won't work. You'll have to manually set some folders to be owned by the user "nobody".
 
 ## Instructions
-You can read more info on my site here: http://boomshadow.net/tech/fixes/fixperms-script/
 
 ### Fixperms - for one single user
 
-To get the fixperms script, simply wget the file from GitHub and make sure it's executable:
+To get the `fixperms` script, simply wget the file from GitHub and make sure it's executable:
 
 ```bash
 wget https://raw.githubusercontent.com/PeachFlame/cPanel-fixperms/master/fixperms.sh
@@ -51,20 +50,19 @@ sudo sh ./fixperms.sh -v -all
 ```
 
 ### Getting Help
-You can run fixperms with the '-h' or '--help' flags in order to see a help menu.
+You can run `fixperms` with the '-h' or '--help' flags in order to see a help menu.
 
 You can also open an issue here on GitHub if you see any problems.
 
 ### Adding Fixperms to your bin
-I host numerous websites for friends and family, who will routinely make mistakes in regards to file permissions. It's understandable; they're not tech people. I will need to fix their permissions for them pretty frequently on my servers so I opted to put the fixperms script in all my servers' bin folders.
+I host numerous websites for friends and family, who will routinely make mistakes in regards to file permissions. It's understandable; they're not tech people. I will need to fix their permissions for them pretty frequently on my servers so I opted to put the `fixperms` script in all my servers' bin folders.
 
 ```bash
 sudo mv fixperms.sh /usr/bin/fixperms
 ```
 
 ## History
-This script is the spiritual recreation of a cPanel 'fixperms' script originally written by my good friend, Dean Freeman. It was something he developed while we were working together doing tech support at a web hosting company.
+Now that `fixperms` is in Github, all contributors will have proper credit. However, before the move to Github, there were a 2 inidividuals that were crucial to the scripts existence:
 
-The fixperms script was so helpful, I wanted to share it with the world. It had been many years since the first version was written, so it needed some updating. I contracted my other friend, [Colin R.](https://github.com/colinrd), to help me rewrite it for the masses, with Dean's blessing.
-
-Colin is a beast and a "pirate" when it comes to coding, and I thank him for everything he did. This newest rendition was developed while we were both working tech support at a different hosting company: ServInt.
+- Dean Freeman
+- Colin R.
