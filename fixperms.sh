@@ -1,27 +1,9 @@
 #! /bin/bash
-#
-# Date: Jan 26th 2012
-# Author: Colin R.
-# Revisions: Jacob "Boom Shadow" Tirey (boomshadow.net)
-# Revisions: Will Ashworth (williamashworth.com || ashworthconsulting.com)
-# Fixperms script for ServInt
-#
+# 
+# License: GNU General Public License v3.0
+# See the Github page for full license and notes:
 # https://github.com/PeachFlame/cPanel-fixperms
 #
-#   Fixperms script for cPanel servers running suPHP or FastCGI.
-#   Written for ServInt.net
-#   Copyright (C) 2012 Colin R.
-#
-#   This program is free software: you can redistribute it and/or modify
-#   it under the terms of the GNU General Public License as published by
-#   the Free Software Foundation, either version 3 of the License, or
-#   (at your option) any later version.
-#
-#   This program is distributed in the hope that it will be useful,
-#   but WITHOUT ANY WARRANTY; without even the implied warranty of
-#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#   GNU General Public License for more details. http://www.gnu.org/licenses/
-
 
 # Set verbose to null
 verbose=""
@@ -131,8 +113,7 @@ fixperms () {
 
 #Parses all users through cPanel's users file
 all () {
-    cd /var/cpanel/users
-    for user in *
+    for user in `cat /etc/domainusers | awk '{print $1}' | cut -d: -f1`
     do
   fixperms $user
     done
