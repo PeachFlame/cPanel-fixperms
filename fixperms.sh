@@ -113,7 +113,7 @@ fixperms () {
 
 #Parses all users through cPanel's users file
 all () {
-    for user in `cat /etc/domainusers | awk '{print $1}' | cut -d: -f1`
+    for user in $(cut -d: -f1 /etc/domainusers)
     do
   fixperms $user
     done
