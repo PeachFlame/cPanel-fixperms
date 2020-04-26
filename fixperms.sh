@@ -96,7 +96,7 @@ fixperms () {
       find $SUBDOMAIN -type f | xargs -d$'\n' -r chmod $verbose 644
       find $SUBDOMAIN -name '*.cgi' -o -name '*.pl' | xargs -r chmod $verbose 755
       chown $verbose -R $account:$account $SUBDOMAIN
-      chmod 755 $verbose
+      chmod $verbose 755 $SUBDOMAIN
       find $SUBDOMAIN -name .htaccess -exec chown $verbose $account.$account {} \;
     done
 
