@@ -123,13 +123,11 @@ all () {
 
 # Main function, switches options passed to it
 case "$1" in
-
     -h) helptext ;;
     --help) helptext ;;
     -v) verbose="-v"
 
     case "$2" in
-
         -all) all ;;
         --account) fixperms "$3" ;;
         -a) fixperms "$3" ;;
