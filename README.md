@@ -16,7 +16,7 @@ Note: This is inteded for **non-DSO** servers (Meaning, it will run just fine fo
 
 ### Fixperms - for one single user
 
-To get the `fixperms` script, simply wget the file from GitHub and make sure it's executable:
+To get the `fixperms` script, simply `wget` the file from GitHub and make sure it's executable:
 
 ```bash
 wget https://raw.githubusercontent.com/PeachFlame/cPanel-fixperms/master/fixperms.sh
@@ -62,10 +62,10 @@ sudo mv fixperms.sh /usr/bin/fixperms
 ```
 
 ## History
-Now that `fixperms` is in Github, all contributors will have proper credit. However, before the move to Github, there were a 2 inidividuals that were crucial to the scripts existence:
+Now that `fixperms` is in Github, all contributors will have proper credit. However, before the move to Github, there were a 2 individuals that were crucial to the scripts existence:
 
 - Dean Freeman
 - Colin R.
 
 ## Contributing
-If you would like to contribute, simply create a new feature branch, named for the fix, and submit a merge request.
+If you would like to contribute, simply create a new feature branch, named for the fix, and submit a pull request.
