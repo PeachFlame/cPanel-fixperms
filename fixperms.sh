@@ -63,7 +63,10 @@ fixperms () {
         tput setaf 4
         echo "Fixing website files..."
         tput sgr0
-    
+
+        # Fix owner of public_html
+        chown -R $verbose $account:$account $HOMEDIR/public_html
+
         # Fix individual files in public_html
         find $HOMEDIR/public_html -type d -exec chmod $verbose 755 {} \;
         find $HOMEDIR/public_html -type f | xargs -d$'\n' -r chmod $verbose 644
@@ -93,6 +96,7 @@ fixperms () {
             tput setaf 4
             echo "Fixing sub/addon domain docroot for $SUBDOMAIN..."
             tput sgr0
+            chown -R $verbose $account:$account $SUBDOMAIN;
             find $SUBDOMAIN -type d -exec chmod $verbose 755 {} \;
             find $SUBDOMAIN -type f | xargs -d$'\n' -r chmod $verbose 644
             find $SUBDOMAIN -name '*.cgi' -o -name '*.pl' | xargs -r chmod $verbose 755
