@@ -14,13 +14,13 @@ helptext () {
     tput setaf 2
     echo "Fix Permissions (fixperms) Script help:"
     echo "Sets file/directory permissions to match suPHP and FastCGI schemes"
-    echo "USAGE: fixperms [options] [scope]"
+    echo "USAGE: fixperms [option] [scope]"
     echo "-------"
     echo "Scope:"
     echo "--account or -a: Specify a cPanel account"
     echo "-all: Run fixperms on all cPanel accounts"
     echo "Options:"
-    echo "-b: Backup perms (declare before -a/-all)"
+    echo "-b: Backup firstly"
     echo "-v: Verbose output"
     echo "-h or --help: Print this screen and exit"
     tput sgr0
@@ -85,7 +85,7 @@ fixperms () {
         find $HOMEDIR/public_html -type d -exec chmod $verbose 755 {} \;
         find $HOMEDIR/public_html -type f | xargs -d$'\n' -r chmod $verbose 644
         find $HOMEDIR/public_html -name '*.cgi' -o -name '*.pl' | xargs -r chmod $verbose 755
-        # Regular and Hidden files support - ref: https://serverfault.com/a/156481
+        # Regular and Hidden files support - hidden ref: https://serverfault.com/a/156481
         # Fix hidden files and folders like .well-known/ with root or other user perms
         chown $verbose -R $account:$account $HOMEDIR/public_html/*
         chown $verbose -R $account:$account $HOMEDIR/public_html/.[^.]*
