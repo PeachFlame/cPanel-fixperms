@@ -14,13 +14,15 @@ helptext () {
     tput setaf 2
     echo "Fix Permissions (fixperms) Script help:"
     echo "Sets file/directory permissions to match suPHP and FastCGI schemes"
-    echo "USAGE: fixperms [options] -a account_name"
+    echo "USAGE: fixperms [options] [scope]"
     echo "-------"
-    echo "Options:"
-    echo "-h or --help: Print this screen and exit"
+    echo "Scope:"
     echo "--account or -a: Specify a cPanel account"
-    echo "-all: Run on all cPanel accounts"
+    echo "-all: Run fixperms on all cPanel accounts"
+    echo "Options:"
+    echo "-b: Backup perms (declare before -a/-all)"
     echo "-v: Verbose output"
+    echo "-h or --help: Print this screen and exit"
     tput sgr0
     exit 0
 }
@@ -54,6 +56,18 @@ fixperms () {
 
         # Get the account's homedir
         HOMEDIR=$(egrep "^${account}:" /etc/passwd | cut -d: -f6)
+
+        # Backup if flag passed through
+        if [ "$backup" = true ] ; then
+            backupdate=$(date +%F)
+            backuptime=$(date "+%F-%T")
+            backupdir="/root/fixperms_backups/fixperms_backups_"${backupdate}""
+            mkdir -p $backupdir
+            echo "Backing up perms for $account"
+            find $HOMEDIR -printf 'chmod %#m "%p"\n' > "${backupdir}"/backup_perms_"${account}"_"${backuptime}".sh
+            echo "Backing up ownership for $account"
+            find $HOMEDIR -printf 'chown %u:%g "%p"\n' > "${backupdir}"/backup_owner_"${account}"_"${backuptime}".sh
+        fi
 
         tput bold
         tput setaf 4
@@ -130,7 +144,8 @@ all () {
 case "$1" in
     -h) helptext ;;
     --help) helptext ;;
-    -v) verbose="-v"
+    -v) verbose="-v" ;;
+    -b) backup="true"
 
     case "$2" in
         -all) all ;;
