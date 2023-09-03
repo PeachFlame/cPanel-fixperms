@@ -23,7 +23,7 @@ wget https://raw.githubusercontent.com/PeachFlame/cPanel-fixperms/master/fixperm
 chmod +x fixperms.sh
 ```
 
-Then, run it (with ROOT permissions) while using the 'a' flag to specify a particular cPanel user:
+Then, run it (with **root** permissions) while using the 'a' flag to specify a particular cPanel user:
 ```bash
 sudo sh ./fixperms.sh -a USER-NAME
 ```
@@ -59,10 +59,11 @@ I host numerous websites for friends and family, who will routinely make mistake
 
 ```bash
 sudo mv fixperms.sh /usr/bin/fixperms
+sudo chmod +x /usr/bin/fixperms
 ```
 
 ## History
-Now that `fixperms` is in Github, all contributors will have proper credit. However, before the move to Github, there were a 2 individuals that were crucial to the scripts existence:
+Now that `fixperms` is in GitHub, all contributors will have proper credit. However, before the move to GitHub, there were a 2 individuals that were crucial to the scripts existence:
 
 - Dean Freeman
 - Colin R.
